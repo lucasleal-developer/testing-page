@@ -1,4 +1,12 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // Esconde o loader quando a página estiver carregada
+    const loader = document.querySelector('.loader-container');
+
+    // Esconde o loader após um pequeno atraso para garantir que tudo esteja carregado
+    setTimeout(() => {
+        loader.classList.add('hidden');
+    }, 800);
+
     // Adiciona efeito de fade-in aos cards dos presidentes
     const presidentCards = document.querySelectorAll('.president-card');
 
@@ -49,7 +57,24 @@ document.addEventListener('DOMContentLoaded', function() {
             const presidentName = card.querySelector('h3').textContent.toLowerCase();
             const presidentInfo = card.querySelector('.president-info p:last-child').textContent.toLowerCase();
 
-            if (presidentName.includes(searchTerm) || presidentInfo.includes(searchTerm)) {
+            // Busca também nas curiosidades
+            let curiosidadesMatch = false;
+            const curiosidadesList = card.querySelectorAll('.curiosidades-list li');
+            if (curiosidadesList.length > 0) {
+                curiosidadesList.forEach(item => {
+                    if (item.textContent.toLowerCase().includes(searchTerm)) {
+                        curiosidadesMatch = true;
+                    }
+                });
+            }
+
+            // Busca também no período
+            const periodText = card.querySelector('.period').textContent.toLowerCase();
+
+            if (presidentName.includes(searchTerm) ||
+                presidentInfo.includes(searchTerm) ||
+                curiosidadesMatch ||
+                periodText.includes(searchTerm)) {
                 card.style.display = 'block';
             } else {
                 card.style.display = 'none';

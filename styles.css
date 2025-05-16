@@ -53,6 +53,42 @@ body {
     padding: 20px;
     background-image: linear-gradient(135deg, var(--bg-color) 0%, var(--bg-color) 100%);
     transition: background-color 0.3s ease, color 0.3s ease;
+    min-height: 100vh;
+    position: relative;
+}
+
+/* Loader */
+.loader-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--bg-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+.loader-container.hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.loader {
+    width: 50px;
+    height: 50px;
+    border: 5px solid var(--accent-color);
+    border-radius: 50%;
+    border-top-color: var(--primary-color);
+    border-bottom-color: var(--secondary-color);
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
 }
 
 header {
@@ -156,13 +192,14 @@ main {
 }
 
 .president-image img {
-    width: 100px;
-    height: 130px;
+    width: 120px;
+    height: 150px;
     object-fit: cover;
+    object-position: top;
     border-radius: 5px;
-    border: 2px solid #ffdf00;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s ease;
+    border: 2px solid var(--accent-color);
+    box-shadow: var(--shadow);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .president-card:hover .president-image img {
@@ -508,15 +545,38 @@ input:checked + .slider:before {
         width: 120px;
         height: 150px;
     }
+
+    .filter-buttons {
+        flex-wrap: wrap;
+        gap: 5px;
+    }
+
+    .filter-btn {
+        font-size: 0.8rem;
+        padding: 6px 12px;
+    }
+
+    .modal-content {
+        width: 95%;
+        padding: 1rem;
+    }
+
+    .timeline-chart-container {
+        height: 300px;
+    }
 }
 
 @media (max-width: 480px) {
     header h1 {
-        font-size: 2rem;
+        font-size: 1.8rem;
+    }
+
+    header p {
+        font-size: 0.9rem;
     }
 
     .timeline h2 {
-        font-size: 1.5rem;
+        font-size: 1.4rem;
     }
 
     .president-info h3 {
@@ -526,5 +586,27 @@ input:checked + .slider:before {
     .president-image img {
         width: 100px;
         height: 130px;
+    }
+
+    .period-description p {
+        font-size: 0.9rem;
+    }
+
+    .theme-switch-wrapper span {
+        font-size: 0.8rem;
+    }
+
+    .search-container {
+        max-width: 90%;
+    }
+
+    #search-president {
+        font-size: 0.9rem;
+        padding: 8px 12px;
+    }
+
+    .social-links {
+        flex-direction: column;
+        gap: 10px;
     }
 }
