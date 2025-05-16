@@ -4,22 +4,86 @@
     box-sizing: border-box;
 }
 
+/* Classe para elementos visíveis apenas para leitores de tela */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+:root {
+    --primary-color: #009c3b; /* Verde da bandeira do Brasil */
+    --secondary-color: #002776; /* Azul da bandeira do Brasil */
+    --accent-color: #ffdf00; /* Amarelo da bandeira do Brasil */
+    --bg-color: #f4f4f4;
+    --card-bg: #ffffff;
+    --text-color: #333333;
+    --secondary-text-color: #666666;
+    --shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    --hover-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    --header-gradient: linear-gradient(135deg, #009c3b 0%, #007c2b 100%);
+    --card-hover-bg: #f0f8ff;
+}
+
+[data-theme="dark"] {
+    --primary-color: #00b347; /* Verde mais claro */
+    --secondary-color: #0046cc; /* Azul mais claro */
+    --accent-color: #ffea80; /* Amarelo mais claro */
+    --bg-color: #121212;
+    --card-bg: #1e1e1e;
+    --text-color: #e0e0e0;
+    --secondary-text-color: #b0b0b0;
+    --shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    --hover-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+    --header-gradient: linear-gradient(135deg, #007c2b 0%, #005c1b 100%);
+    --card-hover-bg: #2a3a4a;
+}
+
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
-    color: #333;
-    background-color: #f4f4f4;
+    color: var(--text-color);
+    background-color: var(--bg-color);
     padding: 20px;
+    background-image: linear-gradient(135deg, var(--bg-color) 0%, var(--bg-color) 100%);
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 header {
-    background-color: #009c3b; /* Verde da bandeira do Brasil */
+    background-color: var(--primary-color);
     color: white;
     text-align: center;
     padding: 2rem;
     margin-bottom: 2rem;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+    background-image: var(--header-gradient);
+    position: relative;
+    overflow: hidden;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+header::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+    opacity: 0.5;
+    z-index: 1;
+}
+
+header h1, header p {
+    position: relative;
+    z-index: 2;
 }
 
 header h1 {
@@ -33,17 +97,33 @@ main {
 }
 
 .timeline {
-    background-color: white;
+    background-color: var(--card-bg);
     padding: 2rem;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+    position: relative;
+    overflow: hidden;
+    background-image: linear-gradient(135deg, #ffffff 0%, #f9f9f9 100%);
 }
 
 .timeline h2 {
-    color: #002776; /* Azul da bandeira do Brasil */
+    color: var(--secondary-color);
     margin: 2rem 0 1rem;
     padding-bottom: 0.5rem;
-    border-bottom: 2px solid #ffdf00; /* Amarelo da bandeira do Brasil */
+    border-bottom: 2px solid var(--accent-color);
+    font-size: 1.8rem;
+    position: relative;
+    display: inline-block;
+}
+
+.timeline h2::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent-color) 0%, rgba(255,223,0,0.3) 100%);
 }
 
 .timeline h2:first-child {
@@ -56,47 +136,377 @@ main {
     background-color: #f9f9f9;
     border-left: 4px solid #009c3b;
     border-radius: 0 5px 5px 0;
-    transition: transform 0.3s ease;
-}
-
-.president-card:hover {
-    transform: translateX(10px);
+    transition: all 0.3s ease;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.president-card h3 {
+.president-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.card-content {
+    display: flex;
+    align-items: center;
+}
+
+.president-image {
+    flex: 0 0 100px;
+    margin-right: 1rem;
+}
+
+.president-image img {
+    width: 100px;
+    height: 130px;
+    object-fit: cover;
+    border-radius: 5px;
+    border: 2px solid #ffdf00;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+}
+
+.president-card:hover .president-image img {
+    transform: scale(1.05);
+}
+
+.president-info {
+    flex: 1;
+}
+
+.president-info h3 {
     color: #002776;
     margin-bottom: 0.5rem;
 }
 
-.president-card .period {
+.president-info .period {
     font-weight: bold;
     color: #009c3b;
     margin-bottom: 0.5rem;
 }
 
+.search-container {
+    margin-top: 1.5rem;
+    position: relative;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#search-president {
+    width: 100%;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 25px;
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+#search-president::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+#search-president:focus {
+    outline: none;
+    background-color: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.filters {
+    max-width: 1200px;
+    margin: 0 auto 2rem;
+    background-color: var(--card-bg);
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+    text-align: center;
+}
+
+.filters h2 {
+    color: var(--secondary-color);
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}
+
+.filter-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+
+.filter-btn {
+    padding: 8px 16px;
+    background-color: #f0f0f0;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+    color: var(--text-color);
+}
+
+.filter-btn:hover {
+    background-color: #e0e0e0;
+    transform: translateY(-2px);
+}
+
+.filter-btn.active {
+    background-color: var(--primary-color);
+    color: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.period-description {
+    margin-bottom: 1.5rem;
+    padding: 0.5rem 1rem;
+    background-color: rgba(0, 39, 118, 0.05);
+    border-radius: 5px;
+    font-style: italic;
+    color: #555;
+}
+
+.president-card {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+}
+
+.president-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.president-card.expanded {
+    background-color: var(--card-hover-bg);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.curiosidades-container {
+    display: none;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px dashed var(--accent-color);
+}
+
+.president-card.expanded .curiosidades-container {
+    display: block;
+    animation: fadeIn 0.5s ease;
+}
+
+.curiosidades-title {
+    font-weight: bold;
+    color: var(--secondary-color);
+    margin-bottom: 0.5rem;
+}
+
+.curiosidades-list {
+    list-style-type: disc;
+    padding-left: 1.5rem;
+}
+
+.curiosidades-list li {
+    margin-bottom: 0.3rem;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
 footer {
     text-align: center;
     margin-top: 2rem;
-    padding: 1rem;
-    color: #666;
+    padding: 2rem;
+    color: var(--secondary-text-color);
+    background-color: var(--card-bg);
+    border-radius: 10px 10px 0 0;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+    transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.theme-switch-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.theme-switch {
+    display: inline-block;
+    height: 24px;
+    position: relative;
+    width: 50px;
+}
+
+.theme-switch input {
+    display: none;
+}
+
+.slider {
+    background-color: #ccc;
+    bottom: 0;
+    cursor: pointer;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transition: .4s;
+    border-radius: 34px;
+}
+
+.slider:before {
+    background-color: white;
+    bottom: 4px;
+    content: "";
+    height: 16px;
+    left: 4px;
+    position: absolute;
+    transition: .4s;
+    width: 16px;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: var(--primary-color);
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+.theme-switch-wrapper span {
+    margin-left: 10px;
+    font-size: 0.9rem;
+}
+
+.social-links {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.social-link {
+    color: var(--secondary-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.social-link:hover {
+    color: var(--primary-color);
+}
+
+/* Estilos para o botão da linha do tempo */
+.timeline-nav {
+    margin-top: 1.5rem;
+}
+
+.timeline-btn {
+    padding: 10px 20px;
+    background-color: var(--secondary-color);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    box-shadow: var(--shadow);
+}
+
+.timeline-btn:hover {
+    background-color: var(--primary-color);
+    transform: translateY(-2px);
+    box-shadow: var(--hover-shadow);
+}
+
+/* Estilos para o modal da linha do tempo */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 100;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.7);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.modal.show {
+    opacity: 1;
+}
+
+.modal-content {
+    background-color: var(--card-bg);
+    margin: 5% auto;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+    width: 80%;
+    max-width: 1000px;
+    transform: translateY(-50px);
+    transition: transform 0.3s ease;
+}
+
+.modal.show .modal-content {
+    transform: translateY(0);
+}
+
+.close {
+    color: var(--secondary-text-color);
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.close:hover {
+    color: var(--primary-color);
+}
+
+.timeline-chart-container {
+    width: 100%;
+    height: 400px;
+    margin-top: 2rem;
 }
 
 @media (max-width: 768px) {
     body {
         padding: 10px;
     }
-    
+
     header {
         padding: 1.5rem;
     }
-    
+
     .timeline {
         padding: 1rem;
     }
-    
+
     .president-card {
         padding: 0.8rem;
+    }
+
+    .card-content {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .president-image {
+        margin-right: 0;
+        margin-bottom: 1rem;
+        align-self: center;
+    }
+
+    .president-image img {
+        width: 120px;
+        height: 150px;
     }
 }
 
@@ -104,12 +514,17 @@ footer {
     header h1 {
         font-size: 2rem;
     }
-    
+
     .timeline h2 {
         font-size: 1.5rem;
     }
-    
-    .president-card h3 {
+
+    .president-info h3 {
         font-size: 1.2rem;
+    }
+
+    .president-image img {
+        width: 100px;
+        height: 130px;
     }
 }

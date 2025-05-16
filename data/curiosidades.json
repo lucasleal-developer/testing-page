@@ -1,0 +1,91 @@
+{
+  "presidentes": [
+    {
+      "nome": "Deodoro da Fonseca",
+      "curiosidades": [
+        "Foi o proclamador da República e o primeiro presidente do Brasil",
+        "Era marechal do Exército Brasileiro",
+        "Renunciou à presidência após menos de dois anos no cargo"
+      ]
+    },
+    {
+      "nome": "Floriano Peixoto",
+      "curiosidades": [
+        "Conhecido como 'Marechal de Ferro' por sua rigidez",
+        "Enfrentou a Revolta da Armada e a Revolução Federalista",
+        "Foi o primeiro vice-presidente a assumir a presidência do Brasil"
+      ]
+    },
+    {
+      "nome": "Prudente de Morais",
+      "curiosidades": [
+        "Primeiro presidente civil do Brasil",
+        "Primeiro presidente eleito por voto direto",
+        "Enfrentou e venceu a Guerra de Canudos durante seu mandato"
+      ]
+    },
+    {
+      "nome": "Getúlio Vargas",
+      "curiosidades": [
+        "Governou o Brasil por 18 anos em períodos diferentes",
+        "Criou a CLT (Consolidação das Leis do Trabalho)",
+        "Seu suicídio em 1954 causou comoção nacional",
+        "Conhecido como 'pai dos pobres'"
+      ]
+    },
+    {
+      "nome": "Juscelino Kubitschek",
+      "curiosidades": [
+        "Construiu Brasília, a nova capital do Brasil",
+        "Seu slogan era '50 anos em 5'",
+        "Era médico de formação",
+        "Implementou a indústria automobilística no Brasil"
+      ]
+    },
+    {
+      "nome": "João Goulart",
+      "curiosidades": [
+        "Conhecido popularmente como 'Jango'",
+        "Foi deposto pelo golpe militar de 1964",
+        "Defendia as 'reformas de base', incluindo a reforma agrária",
+        "Era considerado um político de tendências trabalhistas"
+      ]
+    },
+    {
+      "nome": "Fernando Collor",
+      "curiosidades": [
+        "Primeiro presidente eleito após a redemocratização",
+        "Mais jovem presidente da história do Brasil (40 anos)",
+        "Sofreu impeachment em 1992",
+        "Confiscou as poupanças dos brasileiros no Plano Collor"
+      ]
+    },
+    {
+      "nome": "Fernando Henrique Cardoso",
+      "curiosidades": [
+        "Sociólogo e professor universitário antes da presidência",
+        "Criou o Plano Real como ministro da Fazenda",
+        "Governou por dois mandatos consecutivos (1995-2003)",
+        "Autor de diversos livros acadêmicos"
+      ]
+    },
+    {
+      "nome": "Luiz Inácio Lula da Silva",
+      "curiosidades": [
+        "Ex-metalúrgico e líder sindical",
+        "Primeiro presidente de origem operária do Brasil",
+        "Criou programas sociais como o Bolsa Família",
+        "Foi preso e depois teve suas condenações anuladas pelo STF"
+      ]
+    },
+    {
+      "nome": "Dilma Rousseff",
+      "curiosidades": [
+        "Primeira mulher presidente do Brasil",
+        "Ex-guerrilheira durante a ditadura militar",
+        "Sofreu impeachment em 2016",
+        "Economista de formação"
+      ]
+    }
+  ]
+}
